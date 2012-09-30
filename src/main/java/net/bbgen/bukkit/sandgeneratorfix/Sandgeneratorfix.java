@@ -26,11 +26,12 @@ public class Sandgeneratorfix extends JavaPlugin implements Listener {
 	@EventHandler(priority = EventPriority.HIGH)
     public void onPistonExtend(BlockPistonExtendEvent event)
 	{
+		if(!event.getBlock().getType().equals(Material.PISTON_STICKY_BASE))
+			return;
+		
 		List<Block> blocks = event.getBlocks();
-    	if(blocklistContainsType(blocks, Material.SAND, Material.GRAVEL))
-    	{
+    	if(blocks.size() > 0 && (blocks.get(0).getType().equals(Material.SAND) ||  blocks.get(0).getType().equals(Material.GRAVEL)))
     		event.setCancelled(true);
-    	}
     }
 	
 	private static boolean blocklistContainsType(List<Block> blocks, Material... types)
